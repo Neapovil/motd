@@ -1,0 +1,6 @@
+name: MOTD
+main: com.github.neapovil.motd.Motd
+version: 1.0.0
+api-version: 1.13
+author: Neapovil
+website: https://github.com/Neapovil/motd
