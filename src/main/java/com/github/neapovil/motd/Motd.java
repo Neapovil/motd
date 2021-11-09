@@ -46,7 +46,7 @@ public final class Motd extends JavaPlugin implements Listener
     }
 
     @EventHandler
-    public void serverListPing(ServerListPingEvent event)
+    private void serverListPing(ServerListPingEvent event)
     {
         final List<String> motd = List.of((String) config.get("motd.string1"), (String) config.get("motd.string2"))
                 .stream()
