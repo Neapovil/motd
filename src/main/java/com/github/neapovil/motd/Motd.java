@@ -11,6 +11,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.electronwill.nightconfig.core.file.FileConfig;
 
+import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.arguments.BooleanArgument;
+import dev.jorel.commandapi.arguments.GreedyStringArgument;
+import dev.jorel.commandapi.arguments.LiteralArgument;
+import dev.jorel.commandapi.arguments.MultiLiteralArgument;
 import net.md_5.bungee.api.ChatColor;
 
 public final class Motd extends JavaPlugin implements Listener
@@ -28,11 +33,38 @@ public final class Motd extends JavaPlugin implements Listener
         this.config = FileConfig.builder(new File(this.getDataFolder(), "config.toml"))
                 .autoreload()
                 .autosave()
-                .sync()
                 .build();
         this.config.load();
 
         this.getServer().getPluginManager().registerEvents(this, this);
+
+        new CommandAPICommand("motd")
+                .withPermission("motd.command")
+                .withArguments(new LiteralArgument("set"))
+                .withArguments(new MultiLiteralArgument("string1", "string2"))
+                .withArguments(new LiteralArgument("text"))
+                .withArguments(new GreedyStringArgument("newtext"))
+                .executes((sender, args) -> {
+                    final String string = (String) args[0];
+                    final String newtext = (String) args[1];
+
+                    this.config.set("motd." + string, newtext);
+                    sender.sendMessage("MOTD modificato.");
+                })
+                .register();
+
+        new CommandAPICommand("motd")
+                .withPermission("motd.command")
+                .withArguments(new LiteralArgument("set"))
+                .withArguments(new LiteralArgument("center"))
+                .withArguments(new BooleanArgument("bool"))
+                .executes((sender, args) -> {
+                    final boolean bool = (boolean) args[0];
+
+                    this.config.set("motd.center", bool);
+                    sender.sendMessage("MOTD center: " + bool);
+                })
+                .register();
     }
 
     @Override
