@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.18.1-R0.1-SNAPSHOT'
+  compileOnly group: 'io.papermc.paper', name: 'paper-api', version: '1.18.1-R0.1-SNAPSHOT'
   compileOnly group: 'dev.jorel.CommandAPI', name: 'commandapi-core', version: '6.5.3'
 
   implementation group: 'com.electronwill.night-config', name:'toml', version: '3.6.0'
