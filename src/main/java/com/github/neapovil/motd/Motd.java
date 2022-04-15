@@ -16,6 +16,7 @@ import dev.jorel.commandapi.arguments.BooleanArgument;
 import dev.jorel.commandapi.arguments.GreedyStringArgument;
 import dev.jorel.commandapi.arguments.LiteralArgument;
 import dev.jorel.commandapi.arguments.MultiLiteralArgument;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 
 public final class Motd extends JavaPlugin implements Listener
@@ -86,6 +87,6 @@ public final class Motd extends JavaPlugin implements Listener
                 .map(s -> (boolean) config.get("motd.center") ? StringUtils.center(s, 59) : s)
                 .toList();
 
-        event.setMotd(String.join("\n", motd));
+        event.motd(Component.text(String.join("\n", motd)));
     }
 }
