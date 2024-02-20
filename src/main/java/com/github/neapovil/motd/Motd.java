@@ -68,8 +68,8 @@ public final class Motd extends JavaPlugin implements Listener
                     }
                     catch (IOException e)
                     {
-                        CommandAPI.failWithString("Unable to save.");
                         this.getLogger().severe(e.getMessage());
+                        throw CommandAPI.failWithString("Unable to save.");
                     }
                 })
                 .register();
@@ -89,8 +89,8 @@ public final class Motd extends JavaPlugin implements Listener
                     }
                     catch (IOException e)
                     {
-                        CommandAPI.failWithString("Unable to save.");
                         this.getLogger().severe(e.getMessage());
+                        throw CommandAPI.failWithString("Unable to save.");
                     }
                 })
                 .register();
